@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+    <router operation="replace">
+      <ospf xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-ospf">
+        <id>{{ ospf.process_id }}</id>
+        <router-id>{{ ospf.rid }}</router-id>
+        {% for n in ospf.networks %}
+        <network>
+          <ip>{{ n.number }}</ip>
+          <mask>{{ n.wildcard }}</mask>
+          <area>{{ n.area }}</area>
+        </network>
+        {% endfor %}
+      </ospf>
+    </router>
+  </native>
+</config>

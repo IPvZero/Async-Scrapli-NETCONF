@@ -33,7 +33,7 @@ async def push_config(device):
     """
     Coroutine to open connection and send RPCs
     """
-    dev_name = device["hostname"]
+    hostname = device["hostname"]
     async with AsyncNetconfDriver(
         host=device["host"],
         auth_username=username,
@@ -46,7 +46,7 @@ async def push_config(device):
         configs_result = await conn.edit_config(config=cfg, target="candidate")
         commit_result = await conn.commit()
         unlock_result = await conn.unlock(target="candidate")
-    return dev_name, lock_result, configs_result, commit_result, unlock_result
+    return hostname, lock_result, configs_result, commit_result, unlock_result
 
 
 async def main():
